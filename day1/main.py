@@ -1,8 +1,7 @@
 import os
 import math
 with open("./input.txt") as f:
-        content = f.readlines()
-content = [x.strip() for x in content]
+    content = [x.strip() for x in f.readlines()]
 
 def calcMass(moduleMass: int) -> int:
     return math.floor(moduleMass / 3) - 2
