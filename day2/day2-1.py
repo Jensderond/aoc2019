@@ -1,24 +1,24 @@
 import numpy as np
 
-def run(val, n):
-    if val[n] == 1:
-        val[val[n + 3]] = val[val[n + 1]] + val[val[n + 2]]
-        n += 4
-    elif val[n] == 2:
-        val[val[n + 3]] = val[val[n + 1]] * val[val[n + 2]]
-        n += 4
-    elif val[n] == 99:
-        n = -1
+def compute(val, pos) -> (list, int):
+    if val[pos] == 1:
+        val[val[pos + 3]] = val[val[pos + 1]] + val[val[pos + 2]]
+        pos += 4
+    elif val[pos] == 2:
+        val[val[pos + 3]] = val[val[pos + 1]] * val[val[pos + 2]]
+        pos += 4
+    elif val[pos] == 99:
+        pos = -1
     else:
-        raise(Exception("Unknown opcode"))
-    return val, n
+        raise ValueError
+    return val, pos
 
-val = np.genfromtxt("input.txt", delimiter=",", dtype=int)
-val[1] = 12
-val[2] = 2
+data = list(np.genfromtxt("input.txt", delimiter=",", dtype=int))
+data[1] = 12
+data[2] = 2
 
 n = 0
 while n >= 0:
-    val, n = run(val, n)
+    data, n = compute(data, n)
 
-print(val[0])
+print(f'Part 1: {data[0]}')
